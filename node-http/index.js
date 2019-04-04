@@ -17,7 +17,7 @@ const server = http.createServer((req, res)=>{
         }
 
         let filePath = path.resolve(`./public${fileUrl}`);
-        const fileExt = path.extname(filePath);
+        const fileExt = path.extname(filePath);cd 
         if (fileExt === '.html') {
             fs.exists(filePath, (exists) => {
                 if (!exists) {

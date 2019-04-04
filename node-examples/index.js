@@ -4,7 +4,7 @@ const solveRectange = (l, b) => {
     rectangle(l, b, (err, rectangle) => {
         if (err) {
             console.log('Error: ', err.message);
-        } else {
+        } else {cd
             console.log(`The area is ${rectangle.area()}.`);
             console.log(`The perimeter is ${rectangle.perimeter()}`);
         }

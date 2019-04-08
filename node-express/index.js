@@ -6,57 +6,24 @@ const bodyParser = require('body-parser');
 const hostname = 'localhost';
 const port = 3000;
 
+const dishRouter = require('./routes/dishRouter');
+const promoRouter = require('./routes/promoRouter');
+const leaderRouter = require('./routes/leaderRouter');
+
 const app = express();
+
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 
-app.all('/dishes', (req, res, next) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    next();
-});
-
-app.get('/dishes', (req, res, next) => {
-    res.end('Will send all the dishes to you');
-})
-
-app.post('/dishes', (req, res, next)=> {
-    res.end('Will add the dish: ' + req.body.name + 'with details: ' + req.body.description);
-});
-
-app.put('/dishes', (req, res, next)=> {
-    res.statusCode = 403;
-    res.end('PUT not supported');
-});
-
-app.delete('/dishes', (req, res, next)=> {
-    res.end('Deleting all the dishes!');
-});
-
-app.get('/dishes/:dishId', (req, res, next) => {
-    res.end('Will send you details of dish: ' + req.params.dishId);
-})
-
-app.post('/dishes/:dishId', (req, res, next)=> {
-    res.statusCode = 403;
-    res.end('POST not supported on dish');
-});
-
-app.put('/dishes/:dishId', (req, res, next)=> {
-    res.write('Updating the dish: ' + req.params.dishId + '\n');
-    res.end('Will update the dish: ' + req.body.name + 'with details ' + req.body.description);
-});
-
-app.delete('/dishes/:dishId', (req, res, next)=> {
-    res.end('Deleting the dish: ' + req.params.dishId);
-});
-
-app.use(express.static(__dirname+ '/public'));
+app.use('/dishes', dishRouter);
+app.use('/promotions', promoRouter);
+app.use('/leaders', leaderRouter);
+app.use(express.static(__dirname + '/public'));
 
 app.use((req, res, next) => {
-    res.statusCode = 200;
+    res.statusCode = 404;
     res.setHeader.apply('Content-Type', 'text-html');
-    res.end('<html><body><h1>This is an Express Server</h1></body></html>');
+    res.end('<html><body><h1>Not supprted</h1></body></html>');
 });
 
 const server = http.createServer(app);

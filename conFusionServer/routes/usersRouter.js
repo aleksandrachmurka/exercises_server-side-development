@@ -8,9 +8,16 @@ const User = require('../models/user');
 let usersRouter = express.Router();
 usersRouter.use(bodyParser.json());
 
-usersRouter.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+usersRouter.route('/')
+.get( authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
+  User.find({})
+  .then((users) => {
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'application/json');
+      res.json(users);
+  }, (err) => next(err))
+  .catch((err)=> next(err));
+})
 
 usersRouter.post('/signup', (req, res, next) => {
   User.register(new User({username: req.body.username}), 

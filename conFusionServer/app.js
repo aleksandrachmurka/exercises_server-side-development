@@ -1,22 +1,22 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 const mongoose = require('mongoose');
-var session = require('express-session');
-var FileStore = require('session-file-store')(session);
+const session = require('express-session');
+const FileStore = require('session-file-store')(session);
 const passport = require('passport');
 const authenticate = require('./authenticate');
 const config = require('./config');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/usersRouter');
-var dishRouter = require('./routes/dishRouter');
-var promoRouter = require('./routes/promoRouter');
-var leaderRouter = require('./routes/leaderRouter');
-var uploadRouter = require('./routes/uploadRouter');
-var favoritesRouter = require('./routes/favoritesRouter');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/usersRouter');
+const dishRouter = require('./routes/dishRouter');
+const promoRouter = require('./routes/promoRouter');
+const leaderRouter = require('./routes/leaderRouter');
+const uploadRouter = require('./routes/uploadRouter');
+const favoritesRouter = require('./routes/favoritesRouter');
 
 const Dishes = require('./models/dishes');
 const Promotions = require('./models/promotions');
@@ -30,7 +30,7 @@ connect.then((db) => {
   console.log('Connected to the server');
 }, (err) => {console.log(err)});
 
-var app = express();
+const app = express();
 
 // Secure traffic only
 app.all('*', (req, res, next) => {

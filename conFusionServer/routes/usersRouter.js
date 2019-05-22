@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const passport = require('passport');
 const bodyParser = require('body-parser');
 const cors = require('./cors');
@@ -7,7 +7,7 @@ const authenticate = require('../authenticate');
 const User = require('../models/user');
 
 
-let usersRouter = express.Router();
+const usersRouter = express.Router();
 usersRouter.use(bodyParser.json());
 
 usersRouter.route('/')
@@ -68,7 +68,7 @@ usersRouter.get('/logout', cors.corsWithOptions, (req, res) => {
     res.redirect('/');
   }
   else {
-    var err = new Error('You are not logged in!');
+    let err = new Error('You are not logged in!');
     err.status = 403;
     next(err);
   }

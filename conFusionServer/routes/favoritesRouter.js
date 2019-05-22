@@ -11,7 +11,7 @@ favoritesRouter.use(bodyParser.json());
 
 favoritesRouter.route('/')
 .get(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
-    Favorites.find({user: req.user._id})
+    Favorites.findOne({user: req.user._id})
     .populate('user')
     .populate('dishes')
     .then((favorites) => {
@@ -22,7 +22,7 @@ favoritesRouter.route('/')
     .catch((err)=> next(err));
 })
 .post(cors.corsWithOptions, authenticate.verifyUser, (req, res, next)=> {
-    Favorites.find({user: req.user._id})
+    Favorites.findOne({user: req.user._id})
     .then((favorites) => {
         if (favorites.length > 0) {
             let isDuplicate = false;
@@ -75,7 +75,7 @@ favoritesRouter.route('/')
     res.end('PUT not supported');
 })
 .delete(cors.corsWithOptions, authenticate.verifyUser, (req, res, next)=> {
-    Favorites.find({user: req.user._id})
+    Favorites.findOne({user: req.user._id})
     .then((favorites) => {
         if (favorites.length > 0) {
             favorites[0].remove();

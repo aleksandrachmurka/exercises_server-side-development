@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const favoritesSchema = new Schema({
     user: {
+        required: true,
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
@@ -10,6 +11,8 @@ const favoritesSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Dish'
     } ]
+}, {
+    timestamps: true
 });
 
 const Favorites = mongoose.model('Favorites', favoritesSchema);
